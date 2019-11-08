@@ -137,15 +137,30 @@ public class TextGenerator {
 	private static int[] characterCount(char charArr[], int totalChar) {
 		int charCount[] = new int[totalChar];
 
+		for(int i = 0; i < charArr.length; i++){
+			int ASCIIEq = (int)charArr[i];
+			//32 = space, 46 = period, 10 = /n
+			switch(ASCIIEq){
+			case 10:
+				charArr[25]++;
+			case 32:
+				charArr[26]++;
+			case 46:
+				charArr[27]++;
+			default:
+				charArr[ASCIIEq-97]++;
+			}	
+		}
+		
 		return charCount;
 	}
 	
-	public static double[] nextCharArr(char c, double inputSampleArr[]){
-		int length = inputSampleArr.length;
+	public static double[] nextCharArr(char c, int location, int length){
 		double outputArr[] = new double[length];
 		
 		for(int i = 0; i < length; i++){
-			
+			if(i == location) outputArr[i] = 1.0;
+			else outputArr[i] = 0;		
 		}
 		
 		return outputArr;
@@ -166,11 +181,11 @@ public class TextGenerator {
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
 
-		int TOTAL_CHAR_COUNT = 28;
+		int TOTAL_CHAR_COUNT = 289;
 
 		TextGenerator net = new TextGenerator(TOTAL_CHAR_COUNT, 30, 30, 30, TOTAL_CHAR_COUNT);
 
-		// input is just 26 characters, space, and period
+		// input is just 26 characters, space, nextline and period
 		// output is the same as input
 
 		int history = 10;
@@ -183,12 +198,12 @@ public class TextGenerator {
 
 		while ((c = inputStream.read()) != -1) {
 			System.out.println(Arrays.toString(historyArr));
-
+			
 			// convert to array of times char occurred
 			// convert to array of percentage of char in history
-			//double input[] = calcOccurPercent(characterCount(historyArr, TOTAL_CHAR_COUNT));
+			double input[] = calcOccurPercent(characterCount(historyArr, TOTAL_CHAR_COUNT));
 
-//			double target[] = nextCharArr(c, input);
+			//double target[] = nextCharArr(c, loc, TOTAL_CHAR_COUNT);
 			
 			// net.train(input, target, 0.3);
 			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
