@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.lang.*;
 
 public class TextGenerator {
 
@@ -116,23 +116,21 @@ public class TextGenerator {
 
 	public static char[] startArr(int history, FileReader read) throws IOException {
 		char charArr[] = new char[history];
-
 		int c;
 
-		for (int i = 0; i < history; i++) {
-			charArr[i] = (char) (c = read.read());
-		}
-
+		for (int i = 0; i < history; i++) 
+			charArr[i] = Character.toLowerCase((char) (c = read.read()));
+		
 		return charArr;
 	}
 
 	public static double[] calcOccurPercent(int occurrenceArr[]) {
 		double occurPercent[] = new double[occurrenceArr.length];
 		int length = occurrenceArr.length;
-		
-		for (int i = 0; i < length; i++) 
+
+		for (int i = 0; i < length; i++)
 			occurPercent[i] = occurrenceArr[i] / length;
-		
+
 		return occurPercent;
 	}
 
@@ -161,10 +159,9 @@ public class TextGenerator {
 		int TOTAL_CHAR_COUNT = 28;
 
 		TextGenerator net = new TextGenerator(TOTAL_CHAR_COUNT, 30, 30, 30, TOTAL_CHAR_COUNT);
-		/*
-		 * input is just 26 characters, space, and period output is the same as
-		 * input
-		 */
+
+		// input is just 26 characters, space, and period
+		// output is the same as input
 
 		int history = 10;
 		FileReader inputStream = new FileReader("./src/data.txt");
@@ -181,7 +178,7 @@ public class TextGenerator {
 			// convert to array of percentage of char in history
 
 			// net.train(input, target, 0.3);
-			historyArr = shiftVals(historyArr, (char) c);
+			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
 		}
 
 		/*
