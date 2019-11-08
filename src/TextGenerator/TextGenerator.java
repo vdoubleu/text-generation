@@ -118,9 +118,9 @@ public class TextGenerator {
 		char charArr[] = new char[history];
 		int c;
 
-		for (int i = 0; i < history; i++) 
+		for (int i = 0; i < history; i++)
 			charArr[i] = Character.toLowerCase((char) (c = read.read()));
-		
+
 		return charArr;
 	}
 
@@ -134,12 +134,22 @@ public class TextGenerator {
 		return occurPercent;
 	}
 
-	/*
-	 * private static int[] characterCount(char charArr[]){
-	 * 
-	 * 
-	 * return }
-	 */
+	private static int[] characterCount(char charArr[], int totalChar) {
+		int charCount[] = new int[totalChar];
+
+		return charCount;
+	}
+	
+	public static double[] nextCharArr(char c, double inputSampleArr[]){
+		int length = inputSampleArr.length;
+		double outputArr[] = new double[length];
+		
+		for(int i = 0; i < length; i++){
+			
+		}
+		
+		return outputArr;
+	}
 
 	public static char[] shiftVals(char charArr[], char newChar) {
 		char newCharArr[] = new char[charArr.length];
@@ -172,11 +182,14 @@ public class TextGenerator {
 		// characterCount(historyArr);
 
 		while ((c = inputStream.read()) != -1) {
-			// System.out.println(Arrays.toString(historyArr));
+			System.out.println(Arrays.toString(historyArr));
 
 			// convert to array of times char occurred
 			// convert to array of percentage of char in history
+			//double input[] = calcOccurPercent(characterCount(historyArr, TOTAL_CHAR_COUNT));
 
+//			double target[] = nextCharArr(c, input);
+			
 			// net.train(input, target, 0.3);
 			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
 		}
