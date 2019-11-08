@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class TextGenerator {
 	
@@ -125,11 +126,32 @@ public class TextGenerator {
 		return charArr;
 	}
 	
-	public static double[] calcOccurance(char charArr[]){
+	/*public static double[] calcOccurance(char charArr[]){
+		
+		
 		for(int i = 0; i < 28; i++){
 			
 		}
+	}*/
+	
+	/*private static int[] characterCount(char charArr[]){
+		
+
+		return
+    }*/
+	
+	public static char[] shiftVals(char charArr[], char newChar){
+		char newCharArr[] = new char[charArr.length];
+		
+		for(int i = 0; i < charArr.length - 1; i++){
+			newCharArr[i] = charArr[i+1]; 
+		}
+		
+		newCharArr[charArr.length - 1] = newChar;
+		
+		return newCharArr;
 	}
+  
 	
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
@@ -139,13 +161,16 @@ public class TextGenerator {
 		 FileReader inputStream = new FileReader("./src/data.txt");
 		 int c;
 		 
-		 char historyArr[] = new char[history];
+		 char historyArr[] = startArr(history, inputStream);
 		 
-		 while ((c = inputStream.read()) != -1) {
-               // this method will do whatever you want
+		 //characterCount(historyArr);
+		 
+		 while ((c = inputStream.read()) != -1){
+          System.out.println(Arrays.toString(historyArr));
+          
           
            // net.train(input, target, 0.3);
-		 
+          historyArr = shiftVals(historyArr, (char)c);
 		 }
 		 
 		/*for(int i = 0; i < amount; i++){					
