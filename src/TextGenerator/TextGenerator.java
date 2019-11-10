@@ -142,13 +142,18 @@ public class TextGenerator {
 			//32 = space, 46 = period, 10 = /n
 			switch(ASCIIEq){
 			case 10:
+			case 13:
 				charCount[25]++;
+				break;
 			case 32:
 				charCount[26]++;
+				break;
 			case 46:
 				charCount[27]++;
+				break;
 			default:
 				charCount[ASCIIEq-97]++;
+				break;
 			}	
 		}
 		
@@ -160,13 +165,18 @@ public class TextGenerator {
 		
 		switch(ASCIIEq){
 		case 10:
+		case 13:
 			outputArr[25] = 1;
+			break;
 		case 32:
 			outputArr[26] = 1;
+			break;
 		case 46:
 			outputArr[27] = 1;
+			break;
 		default:
 			outputArr[ASCIIEq-97] = 1;
+			break;
 		}	
 		
 		return outputArr;
@@ -210,10 +220,9 @@ public class TextGenerator {
 			int charCount[] = characterCount(historyArr, TOTAL_CHAR_COUNT);
 			
 			double input[] = calcOccurPercent(charCount);
-
 			double target[] = nextCharArr(c, TOTAL_CHAR_COUNT);
 			
-			// net.train(input, target, 0.3);
+			net.train(input, target, 0.3);
 			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
 		}
 
