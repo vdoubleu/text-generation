@@ -203,17 +203,25 @@ public class TextGenerator {
 
 		// input is just 26 characters, space, nextline and period
 		// output is the same as input
+		
+		// 30 * 3 hidden nodes
+		// will adjust as time goes on
 
 		int history = 10;
 		FileReader inputStream = new FileReader("./src/data.txt");
 		int c;
-
+		
+		/****************************************
+		 * 				training				*
+		 * **************************************
+		 */
+		
 		char historyArr[] = startArr(history, inputStream);
-
-		// characterCount(historyArr);
+		
+		//file(lengthCount);
 
 		while ((c = inputStream.read()) != -1) {
-			System.out.println(Arrays.toString(historyArr));
+			//System.out.println(Arrays.toString(historyArr));
 			
 			// convert to array of times char occurred
 			// convert to array of percentage of char in history
@@ -225,13 +233,19 @@ public class TextGenerator {
 			net.train(input, target, 0.3);
 			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
 		}
-
-		/*
-		 * for(int i = 0; i < amount; i++){ if(i%10000 == 0)
-		 * System.out.println(((float)i/amount)*100 + "%"); }
+		
+		System.out.println("Training Complete");
+		
+		//------------------------------------------------
+		
+		/****************************************
+		 * 				inference				*
+		 * **************************************
 		 */
-
-		// }
+		
+		
+		
+		
 
 	}
 
