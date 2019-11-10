@@ -114,6 +114,7 @@ public class TextGenerator {
 		return 1d / (1 + Math.pow(Math.E, (-input)));
 	}
 
+	
 	public static char[] startArr(int history, FileReader read) throws IOException {
 		char charArr[] = new char[history];
 		int c;
@@ -243,8 +244,27 @@ public class TextGenerator {
 		 * **************************************
 		 */
 		
+		String startPrompt;
+		
+		System.out.println("Input starting prompt (prompt must be atleast " + history + " characters):");
+		startPrompt = scan.nextLine();
+		
+		int promptLength = startPrompt.length();
+		
+		while(promptLength < history){
+			System.out.println("Prompt too short, please input longer prompt:");
+			startPrompt = scan.nextLine();
+			promptLength = startPrompt.length();
+		}
+		
+		if(promptLength > 10){
+			startPrompt = startPrompt.substring(promptLength - history - 1);
+		}
 		
 		
+		double userInput[] = strToCharArray(startPrompt);
+		
+		TextGenerator.calculate(userInput);
 		
 
 	}
