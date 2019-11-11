@@ -205,6 +205,32 @@ public class TextGenerator {
 		
 		return charArr;
 	}
+	
+	public static char bestVal(double charPercentArr[]){
+		int largestCharIndex = 0;
+		char c;
+		
+		for(int i = 1; i < charPercentArr.length; i++)
+			if(charPercentArr[i] > charPercentArr[largestCharIndex])
+				largestCharIndex = i;
+			
+		switch (largestCharIndex){
+		case 27:
+			c = '.';
+			break;
+		case 26:
+			c = ' ';
+			break;
+		case 25:
+			c = (char)10;
+			break;
+		default:
+			c = (char)(largestCharIndex + 97);
+			break;
+		}
+		
+		return c;
+	}
 
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
@@ -274,8 +300,9 @@ public class TextGenerator {
 		
 		double userInput[] = calcOccurPercent(characterCount(strToCharArray(startPrompt), TOTAL_CHAR_COUNT));
 		
-		net.calculate(userInput);
+		double netOut[] = net.calculate(userInput);
 		
+		System.out.println(bestVal(netOut));
 
 	}
 
