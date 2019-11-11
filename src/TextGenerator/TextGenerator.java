@@ -130,7 +130,7 @@ public class TextGenerator {
 		int length = occurrenceArr.length;
 
 		for (int i = 0; i < length; i++)
-			occurPercent[i] = occurrenceArr[i] / length;
+			occurPercent[i] = occurrenceArr[i] / (float) length;
 
 		return occurPercent;
 	}
@@ -193,6 +193,17 @@ public class TextGenerator {
 		newCharArr[charArr.length - 1] = newChar;
 
 		return newCharArr;
+	}
+	
+	public static char[] strToCharArray(String inputStr){
+		int length = inputStr.length();
+		char charArr[] = new char[length];
+		
+		for(int i = 0; i < length; i++){
+			charArr[i] = inputStr.charAt(i);
+		}
+		
+		return charArr;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -257,14 +268,13 @@ public class TextGenerator {
 			promptLength = startPrompt.length();
 		}
 		
-		if(promptLength > 10){
+		if(promptLength > history){
 			startPrompt = startPrompt.substring(promptLength - history - 1);
 		}
 		
+		double userInput[] = calcOccurPercent(characterCount(strToCharArray(startPrompt), TOTAL_CHAR_COUNT));
 		
-		double userInput[] = strToCharArray(startPrompt);
-		
-		TextGenerator.calculate(userInput);
+		net.calculate(userInput);
 		
 
 	}
