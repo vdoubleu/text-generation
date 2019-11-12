@@ -124,6 +124,10 @@ public class TextGenerator {
 
 		return charArr;
 	}
+	
+	public static int downCase(int c){
+		return (int) (Character.toLowerCase((char) c));
+	}
 
 	public static double[] calcOccurPercent(int occurrenceArr[]) {
 		double occurPercent[] = new double[occurrenceArr.length];
@@ -268,7 +272,7 @@ public class TextGenerator {
 		//file(lengthCount);
 
 		while ((c = inputStream.read()) != -1) {
-			//System.out.println(Arrays.toString(historyArr));
+			c = downCase(c);
 			
 			// convert to array of times char occurred
 			// convert to array of percentage of char in history
@@ -278,7 +282,7 @@ public class TextGenerator {
 			double target[] = nextCharArr(c, TOTAL_CHAR_COUNT);
 			
 			net.train(input, target, 0.3);
-			historyArr = shiftVals(historyArr, Character.toLowerCase((char) c));
+			historyArr = shiftVals(historyArr, (char) c);
 		}
 		
 		System.out.println("Training Complete");
