@@ -152,6 +152,9 @@ public class TextGenerator {
 			case 46:
 				charCount[27]++;
 				break;
+			case 44:
+				charCount[28]++;
+				break;
 			default:
 				charCount[ASCIIEq-97]++;
 				break;
@@ -174,6 +177,9 @@ public class TextGenerator {
 			break;
 		case 46:
 			outputArr[27] = 1;
+			break;
+		case 44:
+			outputArr[28] = 1;
 			break;
 		default:
 			outputArr[ASCIIEq-97] = 1;
@@ -215,6 +221,9 @@ public class TextGenerator {
 				largestCharIndex = i;
 			
 		switch (largestCharIndex){
+		case 28:
+			c = ',';
+			break;
 		case 27:
 			c = '.';
 			break;
@@ -235,11 +244,11 @@ public class TextGenerator {
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
 
-		int TOTAL_CHAR_COUNT = 28;
+		int TOTAL_CHAR_COUNT = 29;
 
 		TextGenerator net = new TextGenerator(TOTAL_CHAR_COUNT, 30, 30, 30, TOTAL_CHAR_COUNT);
 
-		// input is just 26 characters, space, nextline and period
+		// input is just 26 characters, space, nextline, period and comma
 		// output is the same as input
 		
 		// 30 * 3 hidden nodes
@@ -303,7 +312,7 @@ public class TextGenerator {
 		double netOut[] = net.calculate(userInput);
 		
 		System.out.println(bestVal(netOut));
-
+		
 	}
 
 }
