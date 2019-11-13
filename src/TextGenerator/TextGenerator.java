@@ -325,7 +325,7 @@ public class TextGenerator {
 		System.out.print(outputChar);
 		
 		//incorporate new val into outputChar array
-		charArr = shiftChars(charArr, outputChar);
+		charArr = shiftChars(charArr, outputChar); 
 
 		}
 		
