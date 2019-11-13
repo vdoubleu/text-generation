@@ -320,15 +320,13 @@ public class TextGenerator {
 		netOutHistory = calcOccurPercent(characterCount(charArr, TOTAL_CHAR_COUNT));
 		
 		netOut = net.calculate(netOutHistory);
-		//System.out.println(Arrays.toString(netOutHistory));
-		
+	
 		outputChar = bestVal(netOut);
 		System.out.print(outputChar);
 		
 		//incorporate new val into outputChar array
 		charArr = shiftChars(charArr, outputChar);
-		
-		//System.out.println(Arrays.toString(charArr));
+
 		}
 		
 		
