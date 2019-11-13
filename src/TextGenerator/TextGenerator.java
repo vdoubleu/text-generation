@@ -338,6 +338,7 @@ public class TextGenerator {
 		charArr = shiftChars(charArr, outputChar); 
 		}
 		
+		System.out.println("\n\n --DONE--");
 		
 	}
 
