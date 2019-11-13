@@ -3,8 +3,6 @@ package TextGenerator;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.lang.*;
 
 public class TextGenerator {
 
@@ -295,6 +293,7 @@ public class TextGenerator {
 		 */
 		
 		String startPrompt;
+		int outputQuant;
 		
 		System.out.println("Input starting prompt (prompt must be atleast " + history + " characters):");
 		startPrompt = scan.nextLine();
@@ -311,12 +310,23 @@ public class TextGenerator {
 			startPrompt = startPrompt.substring(promptLength - history - 1);
 		}
 		
+		System.out.println("How many characters long should the output be?");
+		outputQuant = scan.nextInt();
+		
+		while(outputQuant < 0){
+			System.out.println("Input must be positive");
+			outputQuant = scan.nextInt();
+		}
+		
+		System.out.print("\nOutput:\n" + startPrompt);
+		
+		//character output
 		char charArr[] = strToCharArray(startPrompt);
 		double netOutHistory[];
 		double netOut[];
 		char outputChar;
 		
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < outputQuant; i++){
 		netOutHistory = calcOccurPercent(characterCount(charArr, TOTAL_CHAR_COUNT));
 		
 		netOut = net.calculate(netOutHistory);
@@ -326,7 +336,6 @@ public class TextGenerator {
 		
 		//incorporate new val into outputChar array
 		charArr = shiftChars(charArr, outputChar); 
-
 		}
 		
 		
