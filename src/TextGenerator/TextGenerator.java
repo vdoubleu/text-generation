@@ -193,7 +193,7 @@ public class TextGenerator {
 		return outputArr;
 	}
 
-	public static char[] shiftVals(char charArr[], char newChar) {
+	public static char[] shiftChars(char charArr[], char newChar) {
 		char newCharArr[] = new char[charArr.length];
 
 		for (int i = 0; i < charArr.length - 1; i++) {
@@ -282,7 +282,7 @@ public class TextGenerator {
 			double target[] = nextCharArr(c, TOTAL_CHAR_COUNT);
 			
 			net.train(input, target, 0.3);
-			historyArr = shiftVals(historyArr, (char) c);
+			historyArr = shiftChars(historyArr, (char) c);
 		}
 		
 		System.out.println("Training Complete");
@@ -311,11 +311,26 @@ public class TextGenerator {
 			startPrompt = startPrompt.substring(promptLength - history - 1);
 		}
 		
-		double userInput[] = calcOccurPercent(characterCount(strToCharArray(startPrompt), TOTAL_CHAR_COUNT));
+		char charArr[] = strToCharArray(startPrompt);
+		double netOutHistory[];
+		double netOut[];
+		char outputChar;
 		
-		double netOut[] = net.calculate(userInput);
+		for(int i = 0; i < 10; i++){
+		netOutHistory = calcOccurPercent(characterCount(charArr, TOTAL_CHAR_COUNT));
 		
-		System.out.println(bestVal(netOut));
+		netOut = net.calculate(netOutHistory);
+		//System.out.println(Arrays.toString(netOutHistory));
+		
+		outputChar = bestVal(netOut);
+		System.out.print(outputChar);
+		
+		//incorporate new val into outputChar array
+		charArr = shiftChars(charArr, outputChar);
+		
+		//System.out.println(Arrays.toString(charArr));
+		}
+		
 		
 	}
 
