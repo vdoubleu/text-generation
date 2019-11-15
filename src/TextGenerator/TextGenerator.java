@@ -280,7 +280,7 @@ public class TextGenerator {
 			double input[] = calcOccurPercent(charCount);
 			double target[] = nextCharArr(c, TOTAL_CHAR_COUNT);
 			
-			net.train(input, target, 0.3);
+			net.train(input, target, 0.05);
 			historyArr = shiftChars(historyArr, (char) c);
 		}
 		
