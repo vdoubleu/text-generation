@@ -270,6 +270,7 @@ public class TextGenerator {
 		//file(lengthCount);
 
 		while ((c = inputStream.read()) != -1) {
+			System.out.print((char) c);
 			c = downCase(c);
 			
 			// convert to array of times char occurred
@@ -292,22 +293,27 @@ public class TextGenerator {
 		 * **************************************
 		 */
 		
-		String startPrompt;
+		while(true){
+		String originalStartPrompt;
+		String intakePrompt;
 		int outputQuant;
 		
 		System.out.println("Input starting prompt (prompt must be atleast " + history + " characters):");
-		startPrompt = scan.nextLine();
+		originalStartPrompt = scan.nextLine();
 		
-		int promptLength = startPrompt.length();
+		int promptLength = originalStartPrompt.length();
 		
 		while(promptLength < history){
 			System.out.println("Prompt too short, please input longer prompt:");
-			startPrompt = scan.nextLine();
-			promptLength = startPrompt.length();
+			originalStartPrompt = scan.nextLine();
+			promptLength = originalStartPrompt.length();
 		}
 		
+		intakePrompt = originalStartPrompt;
+
+		
 		if(promptLength > history){
-			startPrompt = startPrompt.substring(promptLength - history - 1);
+			intakePrompt = originalStartPrompt.substring(promptLength - history - 1);
 		}
 		
 		System.out.println("How many characters long should the output be?");
@@ -318,10 +324,10 @@ public class TextGenerator {
 			outputQuant = scan.nextInt();
 		}
 		
-		System.out.print("\nOutput:\n" + startPrompt);
+		System.out.print("\nOutput:\n" + originalStartPrompt);
 		
 		//character output
-		char charArr[] = strToCharArray(startPrompt);
+		char charArr[] = strToCharArray(intakePrompt);
 		double netOutHistory[];
 		double netOut[];
 		char outputChar;
@@ -339,7 +345,7 @@ public class TextGenerator {
 		}
 		
 		System.out.println("\n\n --DONE--");
-		
+		}
 	}
 
 }
